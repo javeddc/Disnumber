@@ -10,8 +10,8 @@ CREATE TABLE pairs(
   time_stamp TIMESTAMP NOT NULL,
   adjective_1_id INTEGER NOT NULL,
   noun_1_id INTEGER NOT NULL,
-  adjective_2_id INTEGER NOT NULL,
-  noun_2_id INTEGER NOT NULL,
+  adjective_2_id INTEGER,
+  noun_2_id INTEGER,
   access_count INTEGER
 );
 

@@ -37,17 +37,71 @@ get '/result' do
   if numchars.include? input[0]
     @digits = input.gsub(' ','')
     if !Pair.exists?(digits: @digits)
-      return erb :error
+      adj_id_arr = Adjective.where.not(id: nil).pluck(:id)
+      noun_id_arr = Noun.where.not(id: nil).pluck(:id)
+
+      if Pair.count < 450000
+        new_pair_found = false
+        while new_pair_found == false do
+          a1 = adj_id_arr.sample
+          n1 = noun_id_arr.sample
+          if Pair.where(adjective_1_id: a1, noun_1_id: n1, adjective_2_id: nil, noun_2_id: nil) == []
+            new_pair_found = true
+          end
+        end
+
+        Pair.create(
+          digits: @digits,
+          time_stamp: Time.now,
+          adjective_1_id: a1,
+          noun_1_id: n1,
+          access_count: 0
+          )
+
+      else
+
+        new_pair_found = false
+        while new_pair_found == false do
+          a1 = adj_id_arr.sample
+          a2 = adj_id_arr.sample
+          n1 = noun_id_arr.sample
+          if Pair.where(adjective_1_id: a1, noun_1_id: n1, adjective_2_id: a2, noun_2_id: nil) == []
+            new_pair_found = true
+          end
+        end
+
+        Pair.create(
+          digits: @digits,
+          time_stamp: Time.now,
+          adjective_1_id: a1,
+          adjective_2_id: a2,
+          noun_1_id: n1,
+          access_count: 0
+          )
+
+
+      end
+
     end
-    @phrase = Pair.find_by(digits: @digits).phrase
+    found_pair = Pair.find_by(digits: @digits)
+    found_pair.access_count += 1
+    found_pair.save
+    @phrase = found_pair.phrase
 
   else
+
     words = input.split(/ |\.|,|-/)
-    a1 = Adjective.find_by(word: words[0]).id
-    n1 = Noun.find_by(word: words[1]).id
-    a2 = Adjective.find_by(word: words[2]).id
-    n2 = Noun.find_by(word: words[3]).id
-    found_pair = Pair.find_by(adjective_1_id: a1, noun_1_id: n1, adjective_2_id: a2, noun_2_id: n2)
+    if words.length == 2
+      a1 = Adjective.find_by(word: words[0]).id
+      n1 = Noun.find_by(word: words[1]).id
+      found_pair = Pair.find_by(adjective_1_id: a1, noun_1_id: n1, adjective_2_id: nil, noun_2_id: nil)
+    end
+    if words.length == 3
+      a1 = Adjective.find_by(word: words[0]).id
+      a2 = Adjective.find_by(word: words[1]).id
+      n1 = Noun.find_by(word: words[2]).id
+      found_pair = Pair.find_by(adjective_1_id: a1, noun_1_id: n1, adjective_2_id: a2, noun_2_id: nil)
+    end
     @digits = found_pair.digits
     @phrase = found_pair.phrase
   end
@@ -101,5 +155,39 @@ end
 get '/detail/:id' do
   redirect '/index' unless session[:user_id]
   @req = Request.find(params[:id])
+  adj_id_arr = Adjective.where.not(id: nil).pluck(:id)
+  noun_id_arr = Noun.where.not(id: nil).pluck(:id)
+  new_pair_found = false
+  while new_pair_found == false do
+    @rand_adj_1 = adj_id_arr.sample
+    @rand_adj_2 = adj_id_arr.sample
+    @rand_noun_1 = noun_id_arr.sample
+    if Pair.where(adjective_1_id: @rand_adj_1, noun_1_id: @rand_noun_1, adjective_2_id: @rand_adj_2, noun_2_id: nil) == []
+      new_pair_found = true
+    end
+  end
   erb :detail
+end
+
+post '/record' do
+  params[:pair_size]
+  if params[:pair_size] == 2
+    Pair.create(
+      digits: params[:digits],
+      time_stamp: Time.now,
+      adjective_1_id: params[:rand_adj_1],
+      noun_1_id: params[:rand_noun_1],
+      access_count: 0
+      )
+    elsif params[:pair_size] == 3
+      Pair.create(
+        digits: params[:digits],
+        time_stamp: Time.now,
+        adjective_1_id: params[:rand_adj_1],
+        adjective_2_id: params[:rand_adj_2],
+        noun_1_id: params[:rand_noun_1],
+        access_count: 0
+        )
+    end
+  redirect "/detail/#{params[:req_id]}"
 end

@@ -456,3 +456,7 @@ body {
   border-radius: 2em;
   padding: 1em;
 }
+
+.highlighted {
+  color: blue;
+}

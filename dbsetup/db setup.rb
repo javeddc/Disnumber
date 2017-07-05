@@ -8,17 +8,7 @@ require_relative 'models/noun'
 require_relative 'models/pair'
 
 
-# def generate_numstrings(min, max)
-#   num_arr = []
-#   i = min
-#   while i < max do
-#     j = i.to_s
-#     j.slice!(0)
-#     num_arr.push j
-#     i += 1
-#   end
-#   return num_arr
-# end
+
 
 def generate_numstrings(min_length, max_length)
   length = min_length
@@ -44,7 +34,8 @@ def novel_pair(a_1_int, n_1_int, a_2_int, n_2_int)
   end
 end
 
-numstrings = generate_numstrings(2,4)
+
+
 nouns = WordList.new('./lists/test_new_nouns.csv')
 nouns.chomp_list
 adjectives = WordList.new('./lists/test_new_adjectives.csv')
@@ -63,27 +54,27 @@ adj_id_arr = Adjective.where.not(id: nil).pluck(:id)
 noun_id_arr = Noun.where.not(id: nil).pluck(:id)
 
 
-
-numstrings.each do |numstring|
-  new_pair_found = false
-  while new_pair_found == false do
-
-    a1 = adj_id_arr.sample
-    n1 = noun_id_arr.sample
-    a2 = adj_id_arr.sample
-    n2 = noun_id_arr.sample
-    new_pair_found = novel_pair(a1, n1, a2, n2)
-  end
-
-  Pair.create(
-  digits: numstring,
-  time_stamp: Time.now,
-  adjective_1_id: a1,
-  noun_1_id: n1,
-  adjective_2_id: a2,
-  noun_2_id: n2
-  )
-end
+# numstrings = generate_numstrings(2,4)
+# numstrings.each do |numstring|
+#   new_pair_found = false
+#   while new_pair_found == false do
+#
+#     a1 = adj_id_arr.sample
+#     n1 = noun_id_arr.sample
+#     a2 = adj_id_arr.sample
+#     n2 = noun_id_arr.sample
+#     new_pair_found = novel_pair(a1, n1, a2, n2)
+#   end
+#
+#   Pair.create(
+#   digits: numstring,
+#   time_stamp: Time.now,
+#   adjective_1_id: a1,
+#   noun_1_id: n1,
+#   adjective_2_id: a2,
+#   noun_2_id: n2
+#   )
+# end
 
 
 binding.pry

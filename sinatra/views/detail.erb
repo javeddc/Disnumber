@@ -14,8 +14,35 @@
   <p>Current pairing:</p>
   <p>ID:
     <%= @req.pair_id %></p>
-  <p>Phrase:
+  <p>Current phrase for <%= @req.digits %>:
     <%= Pair.find(@req.pair_id).phrase %></p>
+
+    <form action="/record" method="post">
+      <p>Suggested replacement: </p>
+      <input type="hidden" name="rand_adj_1" value="<%= @rand_adj_1 %>">
+      <input type="hidden" name="rand_adj_2" value="<%= @rand_adj_2 %>">
+      <input type="hidden" name="rand_noun_1" value="<%= @rand_noun_1 %>">
+      <input type="hidden" name="rand_noun_2" value="<%= @rand_noun_2 %>">
+      <input type="hidden" name="digits" value="<%= @req.digits %>">
+      <input type="hidden" name="pair_size" value="<%= Pair.find(@req.pair_id).size %>">
+      <input type="hidden" name="req_id" value="<%= @req.id %>">
+      <p class="highlighted">
+      <% case Pair.find(@req.pair_id).size
+      when 2 %>
+      <%= "#{Adjective.find(@rand_adj_1).word} #{Noun.find(@rand_noun_1).word}" %>
+      <% when 3 %>
+      <%= "#{Adjective.find(@rand_adj_1).word} #{Adjective.find(@rand_adj_2).word} #{Noun.find(@rand_noun_1).word}" %>
+      <% end %>
+      </p>
+
+      <button>Accept Replacement</button>
+    </form>
+    <form action="/detail/<%= @req.id %>" method="get">
+      <button>Generate New Phrase</button>
+    </form>
+
+
+
 </div>
 
 <br>
