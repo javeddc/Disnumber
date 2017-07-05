@@ -1,0 +1,29 @@
+
+
+
+
+<h2>disnumber!</h2>
+
+
+<div class="output_field">
+
+
+  <h5><%= @digits %></h5>
+
+  <h5><%= @phrase %></h5>
+
+<form action="/request" method="get">
+  <input type="hidden" name="pair_id" value="<%= Pair.find_by(digits: @digits).id %>">
+  <button>Flag this phrase</button>
+</form>
+
+</div>
+
+<div class="input_field">
+
+<h5>enter another number or phrase to look up:</h5>
+
+<form action="/result" method="get">
+  <input type="text" name="user_input" value="">
+  <button>FIND</button>
+</form>

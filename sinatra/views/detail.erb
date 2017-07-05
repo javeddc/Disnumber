@@ -1,0 +1,26 @@
+<h3>disnumber: site dashboard</h3>
+
+<h5>Request details:</h5>
+<p>Request ID:
+  <%= @req.id %></p>
+<p>Request Type:
+  <%= @req.request_type %></p>
+<p>Request Status:
+  <%= @req.status %></p>
+<p>Assosciated number:
+  <%= @req.digits %></p>
+
+<div class="issue_field">
+  <p>Current pairing:</p>
+  <p>ID:
+    <%= @req.pair_id %></p>
+  <p>Phrase:
+    <%= Pair.find(@req.pair_id).phrase %></p>
+</div>
+
+<br>
+
+<p>Email:
+  <%= @req.email %></p>
+<p>Message:
+  <%= @req.message %></p>

@@ -1,0 +1,42 @@
+<h3>disnumber: site dashboard</h3>
+
+<p>Currently logged in as:
+  <%= @user.email %></p>
+
+<h4>Current requests:
+</h4>
+
+<table class="u-full-width">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Status</th>
+      <th>Type</th>
+      <th>Phrase</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% Request.all.order(:status).limit(10).offset(10 * @page).each do |request| %>
+
+
+      <tr>
+
+        <td><a href="/detail/<%= request.id %>"><%= request.id %></a></td>
+        <td><%= request.status %></td>
+        <td><%= request.request_type %></td>
+        <td><%= Pair.find(request.pair_id).phrase %></td>
+
+      </tr>
+
+
+    <% end %>
+
+  </tbody>
+</table>
+<% if @page > 0 %>
+<a href="/dashboard/<%= @page - 1 %>">Previous</a>
+<% end %>
+<% if @page < (Request.count / 10)  %>
+<a href="/dashboard/<%= @page + 1 %>">Next</a>
+<% end %>

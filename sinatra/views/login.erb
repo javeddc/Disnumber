@@ -1,0 +1,14 @@
+<h4>Log In:</h4>
+
+<% if @logfail then %>
+<p>Username/password not found.</p>
+<% end %>
+
+<form class="" action="/session" method="post">
+  <label for="email">Email:</label>
+  <input type="text" name="email" value="">
+  <label for="pword">Password:</label>
+  <input type="text" name="pword" value="">
+  <br>
+  <button>Log In</button>
+</form>
