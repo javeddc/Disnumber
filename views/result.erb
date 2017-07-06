@@ -1,4 +1,6 @@
-<h2>disnumber</h2>
+<a href="/"><h1 class="logo">disnumber</h1></a>
+
+
 
 <div class="input_field">
 <form action="/result" method="get">
@@ -12,7 +14,7 @@
   <button id="find_btn">FIND</button>
 </form>
 </div>
-
+<br>
 <% if @found %>
 <div class="output_field">
 
@@ -27,7 +29,7 @@
   <% end %>
 
   <% if @search_type == 'phrase' %>
-  <div class="result_field"><h5 id="phrase_text"><%= @phrase %></h5></div>
+  <div class="result_field"><quotes>‘</quotes><h5 id="phrase_text"><%= @phrase %></h5><quotes>’</quotes></div>
   <h6>this phrase is linked to the number:</h6>
   <a href="tel:<%= @digits %>">
     <h5 id="digits_text"><%= @digits %></h5>
@@ -48,10 +50,9 @@
 <% if !@found %>
 <div class="issue_field">
 
-<h5>Sorry, the phrase "<%= @input %>" wasn't found. Please try again.</h5>
+<h5>Sorry, the phrase "<%= @input %>" wasn't found.</h5>
+<br>
+<h5>Please try again.</h5>
 
 </div>
 <% end %>
-
-
-<br>

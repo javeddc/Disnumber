@@ -1,3 +1,4 @@
+<a href="/"><h1 class="logo">disnumber</h1></a>
 
 <h5>Phrase Change Request:</h5>
 
@@ -5,28 +6,41 @@
 
 
   <h5><%= @flagged_pair.digits %></h5>
-
+  <br>
   <h5><%= @flagged_pair.phrase %></h5>
 
   </div>
 <br>
+
+<div class="container">
+
 <p>You've flagged an issue with this disnumber phrase. Fill in the details below, and we'll change the phrase for you. </p>
-
-
 
 <form action="/request" method="post">
   <input type="hidden" name="pair_id" value="<%= @flagged_pair.id %>">
   <input type="hidden" name="digits" value="<%= @flagged_pair.digits %>">
+  <br>
   <label for="request_type">If there's an issue with this phrase – maybe it's offensive, select Flag. If you're simply requesting a custom phrase, select Customise.</label>
+  <br>
   <select name="request_type">
     <option value="flag">Flag</option>
     <option value="custom">Customise</option>
   </select>
+  <br>
   <label for="email">Enter an email address: </label>
-  <input type="text" name="email" value="">
+  <br>
+  <input class="email_input" type="text" name="email" value="">
+  <br>
+  <br>
   <label for="message">Let us know why you'd like a new phrase for this number: </label>
-  <input type="text" name="message" value="">
+  <br>
+  <textarea name="message" rows="8" cols="45"></textarea>
   <br>
   <button>Submit Request!</button>
-
+  <br>
+  <br>
+  <br>
+  <br>
 </form>
+
+</div>

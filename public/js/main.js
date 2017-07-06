@@ -12,7 +12,6 @@ var dis = {
   alertBox: document.getElementById('notification'),
   alertText: document.getElementById('notification_text'),
   check_input: function() {
-    console.log('beep');
     text = dis.userInput.value;
     text = text.replace(/-|,|\.|_/, ' ');
     if (text.replace(/[^A-Za-z\d +#*-\.]/g, '') != text) {
@@ -21,7 +20,7 @@ var dis = {
       dis.inputAlert.style.color = 'orange';
       dis.btn_off();
     } else if ((/\d|\*/g).test(text) && ((/[a-z]/ig).test(text))) {
-      dis.inputAlert.textContent = 'Please enter a number OR a phrase!';
+      dis.inputAlert.textContent = 'Please enter a number or a phrase!';
       dis.inputAlert.style.visibility = 'visible';
       dis.inputAlert.style.color = 'orange';
       dis.btn_off()
@@ -36,7 +35,7 @@ var dis = {
       dis.btn_on()
     }
 
-    text = text.replace(/[^A-Za-z\d +#*-]/, '')
+    // text = text.replace(/[^A-Za-z\d +#*-]/, '')
     dis.userInput.value = text;
 
   },
@@ -81,16 +80,10 @@ dis.findBtn.style.display = 'none';
 dis.userInput.addEventListener('input', dis.check_input);
 dis.userInput.addEventListener('click', dis.inputFocus);
 dis.userInput.addEventListener('blur', dis.inputBlur);
-dis.inputLabel.addEventListener('click', function() {
-  console.log('clicked');
-})
+
 dis.copyPhraseBtn.addEventListener('click', function() {
   dis.copyToClipboard(dis.phraseText)
 });
 dis.copyDigitsBtn.addEventListener('click', function() {
   dis.copyToClipboard(dis.digitsText)
 });
-
-
-
-console.log('yeh');
