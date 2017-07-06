@@ -219,10 +219,11 @@ h5 {
   font-size: 1.8rem;
   line-height: 1.5;
   letter-spacing: -.05rem;
+  display: inline-block;
 }
 
 h6 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   line-height: 1.6;
   letter-spacing: 0;
 }
@@ -271,25 +272,8 @@ a:hover {
 /* Buttons
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-.button, button, input[type="submit"], input[type="reset"], input[type="button"] {
-  display: inline-block;
-  height: 38px;
-  padding: 0 30px;
-  color: #555;
-  text-align: center;
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 38px;
-  letter-spacing: .1rem;
-  text-transform: uppercase;
-  text-decoration: none;
-  white-space: nowrap;
-  background-color: transparent;
-  border-radius: 4px;
-  border: 1px solid #bbb;
-  cursor: pointer;
-  box-sizing: border-box;
-}
+
+/*
 
 .button:hover, button:hover, input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, .button:focus, button:focus, input[type="submit"]:focus, input[type="reset"]:focus, input[type="button"]:focus {
   color: #333;
@@ -307,26 +291,29 @@ a:hover {
   color: #FFF;
   background-color: #1EAEDB;
   border-color: #1EAEDB;
-}
+}*/
 
 
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-input[type="email"], input[type="number"], input[type="search"], input[type="text"], input[type="tel"], input[type="url"], input[type="password"], textarea, select {
+
+/*input[type="email"], input[type="number"], input[type="search"], input[type="text"], input[type="tel"], input[type="url"], input[type="password"], textarea, select {
   height: 38px;
   padding: 6px 10px;
-  /* The 6px vertically centers text on FF, ignored by Webkit */
+
   background-color: #fff;
   border: 1px solid #D1D1D1;
   border-radius: 4px;
   box-shadow: none;
   box-sizing: border-box;
-}
+}*/
 
 
 /* Removes awkward default styles on some inputs for iOS */
 
+
+/*
 input[type="email"], input[type="number"], input[type="search"], input[type="text"], input[type="tel"], input[type="url"], input[type="password"], textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -363,7 +350,7 @@ label>.label-body {
   display: inline-block;
   margin-left: .5rem;
   font-weight: normal;
-}
+}*/
 
 
 /* Lists
@@ -391,25 +378,6 @@ li {
   margin-bottom: 1rem;
 }
 
-
-/* Code
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-code {
-  padding: .2rem .5rem;
-  margin: 0 .2rem;
-  font-size: 90%;
-  white-space: nowrap;
-  background: #F1F1F1;
-  border: 1px solid #E1E1E1;
-  border-radius: 4px;
-}
-
-pre>code {
-  display: block;
-  padding: 1rem 1.5rem;
-  white-space: pre;
-}
 
 
 /* Tables
@@ -442,19 +410,9 @@ th {
 }
 
 
-/* Spacing
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-button, .button {
-  margin-bottom: 1rem;
-}
-
-input, textarea, select, fieldset {
-  margin-bottom: 1.5rem;
-}
 
 pre, blockquote, dl, figure, table, p, ul, ol, form {
-  margin-bottom: 2.5rem;
+  /*margin-bottom: 2.5rem;*/
 }
 
 
@@ -541,7 +499,7 @@ there.
 @media (min-width: 1200px) {}
 
 body {
-  background-color: pink;
+  background-color: lightgrey;
   text-align: center;
 }
 
@@ -549,7 +507,7 @@ body {
   text-align: center;
   width: 100%;
   margin: auto;
-  background-color: hsla(360, 100%, 100%, 0.5);
+  background-color: hsla(360, 0%, 40%, 0.8);
   padding: 1em;
 }
 
@@ -567,6 +525,24 @@ body {
   margin: auto;
   background-color: hsla(29, 100%, 50%, 0.5);
   padding: 1em;
+}
+
+#phrase_text {
+  font-size: 2.4em;
+  font-weight: 700;
+}
+
+#digits_text {
+  font-size: 2.4em;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+quotes {
+  display: inline;
+  font-size: 2.4em;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 @media (min-width: 800px) {
@@ -615,76 +591,150 @@ body {
 }
 
 
-/* When moving the mouse over the close button */
+
 
 .closebtn:hover {
   color: black;
 }
 
 
-.input--kaede {
-	display: block;
-	overflow: hidden;
-	margin: 1em auto 2em;
-	background: #EFEEEE;
+
+
+*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+.clearfix:before, .clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; }
+
+
+
+.input {
+	position: relative;
+  font-size: 1.2em;
+	z-index: 1;
+	display: inline-block;
+	margin: 1em;
+	max-width: 350px;
+	width: calc(100% - 2em);
+	vertical-align: top;
 }
 
-.input__field--kaede {
-	position: absolute;
-	top: 0;
-	right: 100%;
+.input__field {
+	position: relative;
+	display: block;
+	float: right;
+	padding: 0.8em;
 	width: 60%;
-	height: 100%;
-	background: #fff;
-	color: #9DABBA;
-	-webkit-transition: -webkit-transform 0.5s;
-	transition: transform 0.5s;
-	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+	border: none;
+	border-radius: 0;
+	background: #f0f0f0;
+	/*color: #aaa;*/
+	font-weight: bold;
+	-webkit-appearance: none; /* for box shadows to show on iOS */
 }
 
-.input__label--kaede {
-	z-index: 10;
+.input__field:focus {
+	outline: none;
+}
+
+.input__label {
+	display: inline-block;
+	float: right;
+	padding: 0 1em;
+	width: 40%;
+	color: white;
+	font-weight: bold;
+	font-size: 70.25%;
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.input__label-content {
+	position: relative;
 	display: block;
+	padding: 1.6em 0;
+	width: 100%;
+}
+
+.input--sliding {
+	z-index: auto;
+}
+
+.input__field--sliding {
+	padding: 0.85em 1.5em;
+	width: 100%;
+	/*border-radius: 2em;*/
+	background: #fff;
+	color: #535d92;
+}
+
+.input__label--sliding {
+	z-index: 0;
+	padding: 0 0 0 2em;
+	width: 100%;
+	text-align: left;
+}
+
+.input__label--sliding::after {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
 	width: 100%;
 	height: 100%;
-	text-align: left;
-	cursor: text;
-	-webkit-transform-origin: 0% 50%;
-	transform-origin: 0% 50%;
-	-webkit-transition: -webkit-transform 0.5s;
-	transition: transform 0.5s;
-	-webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.input__label-content--kaede {
-	padding: 1.5em 0;
-}
-
-.input__field--kaede:focus,
-.input--filled .input__field--kaede {
-	-webkit-transform: translate3d(100%, 0, 0);
-	transform: translate3d(100%, 0, 0);
-	-webkit-transition-delay: 0.06s;
-	transition-delay: 0.06s;
-}
-
-.input__field--kaede:focus + .input__label--kaede,
-.input--filled .input__label--kaede  {
-	-webkit-transform: translate3d(60%, 0, 0);
-	transform: translate3d(60%, 0, 0);
+	background: rgba(11, 43, 205, 0.6);
+	opacity: 0;
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
 	pointer-events: none;
 }
 
-@media screen and (max-width: 34em) {
-	.input__field--kaede:focus + .input__label--kaede,
-	.input--filled .input__label--kaede  {
-		-webkit-transform: translate3d(65%, 0, 0) scale3d(0.65, 0.65, 1);
-		transform: translate3d(65%, 0, 0) scale3d(0.65, 0.65, 1);
-		pointer-events: none;
-	}
+.input__label-content--sliding {
+	padding: 0.5em 0;
 }
+
+.input__field--sliding:focus,
+.input__field--sliding:focus +  .input__label--sliding .input__label-content--sliding {
+	z-index: 10000;
+}
+
+.input__field--sliding:focus + .input__label--sliding {
+	color: #fff;
+}
+
+.input__field--sliding:focus + .input__label--sliding::after {
+	opacity: 1;
+}
+
+select {
+  display: block;
+}
+
+button {
+  display: inline-block;
+  margin: 0;
+  border: 1px solid hsla(116, 100%, 100%, 0.4);
+  padding: 0.3em;
+  background-color: transparent;
+  text-transform: uppercase;
+  font-weight: 100;
+  font-size: 0.7em;
+  min-width: 3em;
+}
+
+button:hover {
+  background-color: hsla(116, 100%, 100%, 0.5);
+}
+
+button:focus, input:focus {
+  outline: 0;
+}
+
 
 
 html, body {

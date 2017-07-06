@@ -1,21 +1,40 @@
 <h2>disnumber</h2>
 
+<div class="input_field">
+<form action="/result" method="get">
+  <span class="input input--sliding">
+    <input class="input__field input__field--sliding" type="text" name="user_input" id="user_input">
+
+    <label class="input__label input__label--sliding" for="user_input">
+      <span class="input__label-content input__label-content--sliding" id="input_label">Search by number or phrase</span>
+    </label>
+  </span>
+  <button id="find_btn">FIND</button>
+</form>
+</div>
+
 <% if @found %>
 <div class="output_field">
 
   <% if @search_type == 'digits' %>
   <h5 id="digits_text"><%= @digits %></h5>
-  <button id="copy_digits" type="button" name="button">Copy number to clipboard</button>
-  <h5 id="phrase_text"><%= @phrase %></h5>
+  <h6>this number is linked to the phrase:</h6>
+  <quotes>‘</quotes><h5 id="phrase_text"><%= @phrase %></h5><quotes>’</quotes>
+  <br>
   <button id="copy_phrase" type="button" name="button">Copy phrase to clipboard</button>
+  <br>
+  <button id="copy_digits" type="button" name="button">Copy number to clipboard</button>
   <% end %>
 
   <% if @search_type == 'phrase' %>
-  <h5 id="phrase_text"><%= @phrase %></h5>
-  <button id="copy_phrase" type="button" name="button">Copy phrase to clipboard</button>
+  <div class="result_field"><h5 id="phrase_text"><%= @phrase %></h5></div>
+  <h6>this phrase is linked to the number:</h6>
   <a href="tel:<%= @digits %>">
     <h5 id="digits_text"><%= @digits %></h5>
   </a>
+  <br>
+  <button id="copy_phrase" type="button" name="button">Copy phrase to clipboard</button>
+  <br>
   <button id="copy_digits" type="button" name="button">Copy number to clipboard</button>
   <% end %>
 
@@ -36,13 +55,3 @@
 
 
 <br>
-
-<div class="input_field">
-
-  <h5>enter another number or phrase to look up:</h5>
-
-  <form action="/result" method="get">
-    <label id="input_alert" for="user_input" style="visibility: hidden"></label>
-    <input id="user_input" type="text" name="user_input" value="">
-    <button id="find_btn">FIND</button>
-  </form>
