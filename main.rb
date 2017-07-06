@@ -50,6 +50,7 @@ get '/result' do
 
 
   if /\d/.match? input
+    @found = true
     @search_type = 'digits'
     @digits = input.gsub(' ','')
     if !Pair.exists?(digits: @digits)
@@ -107,19 +108,33 @@ get '/result' do
     @search_type = 'phrase'
     words = input.split(/ |\.|,|-/)
     if words.length == 2
-      a1 = Adjective.find_by(word: words[0]).id
-
-      n1 = Noun.find_by(word: words[1]).id
-      found_pair = Pair.find_by(adjective_1_id: a1, noun_1_id: n1, adjective_2_id: nil, noun_2_id: nil)
+      if Adjective.exists?(word: words[0]) && Noun.exists?(word: words[1])
+        a1 = Adjective.find_by(word: words[0]).id
+        n1 = Noun.find_by(word: words[1]).id
+        found_pair = Pair.find_by(adjective_1_id: a1, noun_1_id: n1, adjective_2_id: nil, noun_2_id: nil)
+      else
+        found_pair = nil
+      end
     end
     if words.length == 3
-      a1 = Adjective.find_by(word: words[0]).id
-      a2 = Adjective.find_by(word: words[1]).id
-      n1 = Noun.find_by(word: words[2]).id
-      found_pair = Pair.find_by(adjective_1_id: a1, noun_1_id: n1, adjective_2_id: a2, noun_2_id: nil)
+      if Adjective.exists?(word: words[0]) && Adjective.exists?(word: words[1]) && Noun.exists?(word: words[2])
+        a1 = Adjective.find_by(word: words[0]).id
+        a2 = Adjective.find_by(word: words[1]).id
+        n1 = Noun.find_by(word: words[2]).id
+        found_pair = Pair.find_by(adjective_1_id: a1, noun_1_id: n1, adjective_2_id: a2, noun_2_id: nil)
+      else
+        found_pair = nil
+      end
     end
-    @digits = found_pair.digits
-    @phrase = found_pair.phrase
+    if found_pair != nil
+      @digits = found_pair.digits
+      @phrase = found_pair.phrase
+      @found = true
+    else
+      @input = input
+      @found = false
+    end
+
   end
   erb :result
 end
