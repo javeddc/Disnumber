@@ -1,14 +1,17 @@
 <h2>disnumber!</h2>
 
 
-<div class="input_field">
+<div class="issue_field">
 
-<h5>enter a number or phrase to look up:</h5>
-<p>sorry, we didn't recognise that number format</p>
-<form action="/result" method="get">
-  <input type="text" name="user_input" value="">
-  <button>FIND</button>
-</form>
+<p>Sorry, somehow you searched for the wrong kind of information. Please enter a phone number (characters like +, #, and * are allowed), OR enter a phrase to look up. If you're searching by phrase, just separate the words with a space. </p>
+
+  <form action="/result" method="get">
+    <label id="input_alert" for="user_input" style="visibility: hidden"></label>
+    <input id="user_input" type="text" name="user_input" value="">
+    <button id="find_btn">FIND</button>
+  </form>
+
+
 
 
 </div>

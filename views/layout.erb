@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
-
-
+    <div id="notification" class="alert" style="display: none">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <p id="notification_text">This is an alert box.</p>
+    </div>
 
     <%= yield %>
-
-
 
     <script src="/js/main.js"></script>
   </body>

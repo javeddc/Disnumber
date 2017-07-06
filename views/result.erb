@@ -7,10 +7,19 @@
 
 <div class="output_field">
 
+<% if @search_type == 'digits' %>
+  <h5 id="digits_text"><%= @digits %></h5>
+  <button id="copy_digits" type="button" name="button">Copy number to clipboard</button>
+  <h5 id="phrase_text"><%= @phrase %></h5>
+  <button id="copy_phrase" type="button" name="button">Copy phrase to clipboard</button>
+<% end %>
 
-  <h5><%= @digits %></h5>
-
-  <h5><%= @phrase %></h5>
+<% if @search_type == 'phrase' %>
+  <h5 id="phrase_text"><%= @phrase %></h5>
+  <button id="copy_phrase" type="button" name="button">Copy phrase to clipboard</button>
+  <a href="tel:<%= @digits %>"><h5  id="digits_text"><%= @digits %></h5></a>
+  <button id="copy_digits" type="button" name="button">Copy number to clipboard</button>
+<% end %>
 
 <form action="/request" method="get">
   <input type="hidden" name="pair_id" value="<%= Pair.find_by(digits: @digits).id %>">

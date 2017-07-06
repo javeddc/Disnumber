@@ -1,5 +1,5 @@
 require 'sinatra'
-# require 'sinatra/reloader'
+require 'sinatra/reloader'
 # require 'pry'
 require 'active_record'
 require_relative 'db_config'
@@ -30,11 +30,27 @@ get '/' do
   erb :index
 end
 
+get '/error' do
+  erb :error
+end
 
 get '/result' do
-  input = params[:user_input]
+  input = params[:user_input].downcase
+
+  if input.match?(/[^A-Za-z\d +#*-]/)
+    @error_input = input
+    redirect '/error'
+  end
+
+  if input.match?(/\d/) && input.match?(/[A-Za-z]/)
+    @error_input = input
+    redirect '/error'
+  end
+
+
 
   if /\d/.match? input
+    @search_type = 'digits'
     @digits = input.gsub(' ','')
     if !Pair.exists?(digits: @digits)
       adj_id_arr = Adjective.where.not(id: nil).pluck(:id)
@@ -88,7 +104,7 @@ get '/result' do
     @phrase = found_pair.phrase
 
   else
-
+    @search_type = 'phrase'
     words = input.split(/ |\.|,|-/)
     if words.length == 2
       a1 = Adjective.find_by(word: words[0]).id
