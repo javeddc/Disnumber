@@ -9,7 +9,7 @@ check_input: function() {
   text = dis.userInput.value;
   text = text.replace(/-|,|\.|_/, ' ');
   if (text.replace(/[^A-Za-z\d +#*-]/g, '') != text) {
-    dis.inputAlert.textContent = 'Please enter letters, numbers, or dialing characters (#*+)';
+    dis.inputAlert.textContent = 'Please enter letters, numbers, or dialing characters (#*+-)';
     dis.inputAlert.style.visibility = 'visible';
     dis.btn_off()
   } else if ((/\d/g).test(text) && ((/[a-z]/ig).test(text))) {
