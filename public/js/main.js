@@ -16,8 +16,6 @@ check_input: function() {
     dis.inputAlert.textContent = 'Please enter a number OR a phrase';
     dis.inputAlert.style.visibility = 'visible';
     dis.btn_off()
-  } else if () {
-
   } else {
     dis.inputAlert.style.visibility = 'hidden';
     dis.btn_on()
