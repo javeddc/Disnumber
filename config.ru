@@ -1,5 +1,5 @@
 
 
-require 'main.rb'
+require './main.rb'
 
 run Sinatra::Application
