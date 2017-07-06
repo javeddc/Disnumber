@@ -1,6 +1,6 @@
 require 'sinatra'
-require 'sinatra/reloader'
-require 'pry'
+# require 'sinatra/reloader'
+# require 'pry'
 require 'active_record'
 require_relative 'db_config'
 
@@ -33,8 +33,8 @@ end
 
 get '/result' do
   input = params[:user_input]
-  numchars = ('0'..'9').to_a
-  if numchars.include? input[0]
+
+  if /\d/.match? input
     @digits = input.gsub(' ','')
     if !Pair.exists?(digits: @digits)
       adj_id_arr = Adjective.where.not(id: nil).pluck(:id)
@@ -49,7 +49,6 @@ get '/result' do
             new_pair_found = true
           end
         end
-
         Pair.create(
           digits: @digits,
           time_stamp: Time.now,
@@ -83,7 +82,7 @@ get '/result' do
       end
 
     end
-    found_pair = Pair.find_by(digits: @digits)
+    found_pair = Pair.where(digits: @digits).order('time_stamp ASC').last
     found_pair.access_count += 1
     found_pair.save
     @phrase = found_pair.phrase
@@ -93,6 +92,7 @@ get '/result' do
     words = input.split(/ |\.|,|-/)
     if words.length == 2
       a1 = Adjective.find_by(word: words[0]).id
+
       n1 = Noun.find_by(word: words[1]).id
       found_pair = Pair.find_by(adjective_1_id: a1, noun_1_id: n1, adjective_2_id: nil, noun_2_id: nil)
     end
@@ -170,8 +170,7 @@ get '/detail/:id' do
 end
 
 post '/record' do
-  params[:pair_size]
-  if params[:pair_size] == 2
+  if params[:pair_size].to_i == 2
     Pair.create(
       digits: params[:digits],
       time_stamp: Time.now,
@@ -179,7 +178,10 @@ post '/record' do
       noun_1_id: params[:rand_noun_1],
       access_count: 0
       )
-    elsif params[:pair_size] == 3
+    req = Request.find(params[:req_id])
+    req.status = 'closed'
+    req.save
+  elsif params[:pair_size].to_i == 3
       Pair.create(
         digits: params[:digits],
         time_stamp: Time.now,

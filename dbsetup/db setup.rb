@@ -36,9 +36,11 @@ end
 
 
 
-nouns = WordList.new('./lists/test_new_nouns.csv')
+nouns = WordList.new('lists/nouns.csv')
 nouns.chomp_list
-adjectives = WordList.new('./lists/test_new_adjectives.csv')
+nouns.shuffle
+adjectives = WordList.new('lists/adjectives.csv')
+adjectives.shuffle
 
 
 nouns.arr.each do |noun|
@@ -50,8 +52,8 @@ adjectives.arr.each do |adjective|
   Adjective.create(word: adjective)
 end
 
-adj_id_arr = Adjective.where.not(id: nil).pluck(:id)
-noun_id_arr = Noun.where.not(id: nil).pluck(:id)
+# adj_id_arr = Adjective.where.not(id: nil).pluck(:id)
+# noun_id_arr = Noun.where.not(id: nil).pluck(:id)
 
 
 # numstrings = generate_numstrings(2,4)

@@ -70,6 +70,10 @@ class WordList
     # self.save
   end
 
+  def shuffle
+    @word_arr.shuffle!
+  end
+
   def remove_word(str)
     @word_arr.delete(str)
   end

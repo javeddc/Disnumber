@@ -460,3 +460,7 @@ body {
 .highlighted {
   color: blue;
 }
+
+.disabled {
+  color: hsla(360, 100%, 100%, 0.3);
+}

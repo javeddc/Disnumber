@@ -1,6 +1,5 @@
-<h3>disnumber: site dashboard</h3>
-
-<h5>Request details:</h5>
+<a href="/dashboard"><h3>dashboard</h3></a>
+<h4>Request details:</h4>
 <p>Request ID:
   <%= @req.id %></p>
 <p>Request Type:
@@ -10,14 +9,21 @@
 <p>Assosciated number:
   <%= @req.digits %></p>
 
+<% if @req.status == 'open' %>
 <div class="issue_field">
+<% elsif @req.status == 'closed' %>
+<div class="output_field">
+<% end %>
+
   <p>Current pairing:</p>
   <p>ID:
     <%= @req.pair_id %></p>
   <p>Current phrase for <%= @req.digits %>:
-    <%= Pair.find(@req.pair_id).phrase %></p>
+    <%= Pair.where(digits: @req.digits).order('time_stamp ASC').last.phrase %></p>
 
+<% if @req.status == 'open' %>
     <form action="/record" method="post">
+
       <p>Suggested replacement: </p>
       <input type="hidden" name="rand_adj_1" value="<%= @rand_adj_1 %>">
       <input type="hidden" name="rand_adj_2" value="<%= @rand_adj_2 %>">
@@ -40,7 +46,7 @@
     <form action="/detail/<%= @req.id %>" method="get">
       <button>Generate New Phrase</button>
     </form>
-
+<% end %>
 
 
 </div>
