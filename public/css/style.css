@@ -266,7 +266,8 @@ h6 {
 
 p {
   max-width: 80%;
-  margin: 0 auto;
+  margin: 1em auto;
+  font-size: 0.8em;
 }
 
 
@@ -597,7 +598,7 @@ crossed {
 
 #tagline {
   font-size: 1.2em;
-  font-family: sans-serif;
+  /*font-family: sans-serif;*/
 }
 
 #tagline_sub {
@@ -605,7 +606,7 @@ crossed {
   font-weight: 100;
   font-size: 0.65em;
   letter-spacing: 0.2em;
-  font-family: sans-serif;
+  /*font-family: sans-serif;*/
 }
 
 emphases {
@@ -789,8 +790,11 @@ footer a {
 .input__field--sliding {
   /*padding: 0.85em 1.5em;*/
   width: 100%;
+
+  margin: 0 auto;
   min-height: 1em;
-  font-size: 1.8em;
+  font-size: 1.5em;
+  text-transform: lowercase;
   font-family: 'Karla';
   /*border-radius: 2em;*/
   background: #fff;
@@ -859,6 +863,13 @@ select {
 .email_input {
   min-height: 38px;
   padding: 0.3em
+}
+
+my-email::after {
+  content: attr(data-domain);
+}
+my-email::before {
+  content: attr(data-user) "\0040";
 }
 
 button {
