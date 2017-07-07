@@ -1,4 +1,4 @@
-[disnumber website](http://www.disnumber.com)
+Access the project via [disnumber.com](http://www.disnumber.com)!
 
 disnumber is a free service that provides a persistent, memorable english phrase for any number you don't want to have to remember. Use it for phone numbers, IDs, serial numbers, or any other number you need to remember or exchange.
 
