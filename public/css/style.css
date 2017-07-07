@@ -170,7 +170,14 @@ html is set to 62.5% so that all the REM measurements throughout Skeleton
 are based on 10px sizing. So basically 1.5rem = 15px :) */
 
 html {
-  font-size: 62.5%;
+  font-size: 80%;
+}
+
+@media (max-width: 550px) {
+  html {
+    font-size: 90%;
+
+  }
 }
 
 body {
@@ -190,6 +197,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0em;
   font-weight: 300;
+  color: #353535;
 }
 
 h1 {
@@ -201,9 +209,7 @@ h1 {
   text-decoration: none;
 }
 
-a>h1 {
-  text-decoration: none;
-}
+
 
 h2 {
   font-size: 3.6rem;
@@ -262,7 +268,6 @@ h6 {
 }
 
 p {
-
   max-width: 80%;
   margin: 0 auto;
 }
@@ -272,7 +277,7 @@ p {
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 a {
-  color: #1EAEDB;
+  color: #3a4166;
   text-decoration: none;
 }
 
@@ -490,7 +495,7 @@ there.
 
 /* Larger than phablet (also point when grid becomes active) */
 
-@media (min-width: 550px) {}
+@media (max-width: 550px) {}
 
 
 /* Larger than tablet */
@@ -532,18 +537,32 @@ body {
   text-align: center;
   width: 100%;
   margin: auto;
-  background-color: hsla(29, 100%, 50%, 0.5);
+  background-color: #f29f4d;
   padding: 1em;
 }
 
 .logo_text {
   text-decoration: none;
-  color: #1EAEDB;
+  color: #0B2BCD;
+}
+
+.issue_text {
+  font-size: 1.4em;
+  font-weight: 700;
+  line-height: 1.2em;
 }
 
 #phrase_text {
   font-size: 2.4em;
   font-weight: 700;
+}
+
+.error_img {
+  background-image: url('/img/sadphone.png');
+  background-size: contain;
+  height: 5em;
+  width: 5em;
+  margin: 0 auto 1em auto;
 }
 
 #digits_text {
@@ -563,18 +582,36 @@ crossed {
   text-decoration: line-through;
 }
 
+#tagline {
+
+}
+
+#tagline_sub {
+  text-transform: uppercase;
+  font-weight: 100;
+  font-size: 0.75em;
+  letter-spacing: 0.2em;
+}
+
+
+
+emphases {
+  text-decoration: underline;
+}
+
 @media (min-width: 800px) {
   .issue_field, .input_field, .output_field {
     width: 70%;
-    border-radius: 2em;
+    /*border-radius: 0.3em;*/
   }
 }
+
+
 
 select, textarea {
   margin: 0 auto;
   height: 38px;
   padding: 6px 10px;
-
   background-color: #fff;
   border: 1px solid #D1D1D1;
   border-radius: 4px;
@@ -593,7 +630,14 @@ input:focus, textarea:focus, select:focus {
   outline: 0;
 }
 
+footer {
+  margin: 3em auto;
+}
 
+footer a {
+  margin: 0 0.5em;
+  color: #3a4166;
+}
 
 .alert {
   padding-top: 0.3em;
@@ -665,7 +709,7 @@ input:focus, textarea:focus, select:focus {
   position: relative;
   display: block;
   float: right;
-  padding: 0.8em;
+  /*padding: 0.8em;*/
   width: 60%;
   border: none;
   border-radius: 0;
@@ -683,7 +727,7 @@ input:focus, textarea:focus, select:focus {
 .input__label {
   display: inline-block;
   float: right;
-  padding: 0 1em;
+  /*padding: 0 1em;*/
   width: 40%;
   color: white;
   font-weight: bold;
@@ -710,8 +754,11 @@ input:focus, textarea:focus, select:focus {
 }
 
 .input__field--sliding {
-  padding: 0.85em 1.5em;
+  /*padding: 0.85em 1.5em;*/
   width: 100%;
+  min-height: 1em;
+  font-size: 1.8em;
+  font-family: 'Karla';
   /*border-radius: 2em;*/
   background: #fff;
   color: #535d92;
@@ -755,6 +802,27 @@ input:focus, textarea:focus, select:focus {
   opacity: 1;
 }
 
+header {
+  display: flex;
+}
+
+.logo_box  {
+
+  text-align: left;
+
+  min-height: 5em;
+}
+
+.tagline_box {
+  display: inline-block;
+  text-align: left;
+  min-width: 30em;
+  font-size: 0.5em;
+  min-height: 5em;
+}
+
+
+
 select {
   display: block;
 }
@@ -787,4 +855,21 @@ button:focus, input:focus {
 html, body {
   margin: 0;
   width: 100%;
+  background: transparent;
+}
+
+html {
+  height: 102%;
+  max-width: 80em;
+  margin: auto;
+  background: #a7cfdf;
+  /* Old browsers */
+  background: -moz-linear-gradient(-45deg, lightgrey, grey);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, lightgrey, grey);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, lightgrey, grey);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a7cfdf', endColorstr='#23538a', GradientType=1);*/
+  /* IE6-9 fallback on horizontal gradient */
 }

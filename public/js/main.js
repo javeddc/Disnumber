@@ -20,7 +20,7 @@ var dis = {
       dis.inputAlert.style.color = 'orange';
       dis.btn_off();
     } else if ((/\d|\*/g).test(text) && ((/[a-z]/ig).test(text))) {
-      dis.inputAlert.textContent = 'Please enter a number or a phrase!';
+      dis.inputAlert.innerHTML = 'Please enter a number <emphasis>or</emphasis> a phrase!';
       dis.inputAlert.style.visibility = 'visible';
       dis.inputAlert.style.color = 'orange';
       dis.btn_off()
@@ -45,7 +45,7 @@ var dis = {
   inputBlur: function(ev) {
     if (ev.target.value.trim() === '') {
       ev.target.parentNode.classList.remove('input--filled');
-      dis.inputAlert.textContent = 'Search by Number or Phrase';
+      dis.inputAlert.textContent = 'Search by number or phrase';
       dis.inputAlert.style.visibility = 'visible';
       dis.inputAlert.style.color = 'white';
     }

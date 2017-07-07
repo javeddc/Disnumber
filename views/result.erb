@@ -1,58 +1,73 @@
-<a href="/"><h1 class="logo">disnumber</h1></a>
+
+
+    <a href="/">
+      <h1 class="logo_text">disnumber</h1>
+    </a>
 
 
 
-<div class="input_field">
-<form action="/result" method="get">
-  <span class="input input--sliding">
-    <input class="input__field input__field--sliding" type="text" name="user_input" id="user_input">
 
-    <label class="input__label input__label--sliding" for="user_input">
-      <span class="input__label-content input__label-content--sliding" id="input_label">Search by number or phrase</span>
-    </label>
-  </span>
-  <button id="find_btn">FIND</button>
-</form>
-</div>
-<br>
-<% if @found %>
-<div class="output_field">
+<div class="edges">
 
-  <% if @search_type == 'digits' %>
-  <h5 id="digits_text"><%= @digits %></h5>
-  <h6>this number is linked to the phrase:</h6>
-  <quotes>‘</quotes><h5 id="phrase_text"><%= @phrase %></h5><quotes>’</quotes>
-  <br>
-  <button id="copy_phrase" type="button" name="button">Copy phrase to clipboard</button>
-  <br>
-  <button id="copy_digits" type="button" name="button">Copy number to clipboard</button>
-  <% end %>
+  <div class="input_field">
+    <form action="/result" method="get">
+      <span class="input input--sliding">
+        <input class="input__field input__field--sliding" type="text" name="user_input" id="user_input">
 
-  <% if @search_type == 'phrase' %>
-  <div class="result_field"><quotes>‘</quotes><h5 id="phrase_text"><%= @phrase %></h5><quotes>’</quotes></div>
-  <h6>this phrase is linked to the number:</h6>
-  <a href="tel:<%= @digits %>">
+        <label class="input__label input__label--sliding" for="user_input">
+          <span class="input__label-content input__label-content--sliding" id="input_label">Search by number or phrase</span>
+        </label>
+      </span>
+      <button id="find_btn">FIND</button>
+    </form>
+  </div>
+  <% if @found %>
+  <div class="output_field">
+
+    <% if @search_type == 'digits' %>
     <h5 id="digits_text"><%= @digits %></h5>
-  </a>
-  <br>
-  <button id="copy_phrase" type="button" name="button">Copy phrase to clipboard</button>
-  <br>
-  <button id="copy_digits" type="button" name="button">Copy number to clipboard</button>
+    <h6>this number is linked to the phrase:</h6>
+    <quotes>‘</quotes>
+    <h5 id="phrase_text"><%= @phrase %></h5>
+    <quotes>’</quotes>
+    <br>
+    <button id="copy_phrase" type="button" name="button">Copy phrase to clipboard</button>
+    <br>
+    <button id="copy_digits" type="button" name="button">Copy number to clipboard</button>
+    <% end %>
+
+    <% if @search_type == 'phrase' %>
+    <div class="result_field">
+      <quotes>‘</quotes>
+      <h5 id="phrase_text"><%= @phrase %></h5>
+      <quotes>’</quotes>
+    </div>
+    <h6>this phrase is linked to the number:</h6>
+    <a href="tel:<%= @digits %>">
+      <h5 id="digits_text"><%= @digits %></h5>
+    </a>
+    <br>
+    <button id="copy_phrase" type="button" name="button">Copy phrase to clipboard</button>
+    <br>
+    <button id="copy_digits" type="button" name="button">Copy number to clipboard</button>
+    <% end %>
+
+    <form action="/request" method="get">
+      <input type="hidden" name="pair_id" value="<%= Pair.where(digits: @digits).order('time_stamp ASC').last.id %>">
+      <button>Flag this phrase</button>
+    </form>
+  </div>
   <% end %>
 
-  <form action="/request" method="get">
-    <input type="hidden" name="pair_id" value="<%= Pair.find_by(digits: @digits).id %>">
-    <button>Flag this phrase</button>
-  </form>
-</div>
-<% end %>
+  <% if !@found %>
+  <div class="issue_field">
+    <div class="error_img"></div>
 
-<% if !@found %>
-<div class="issue_field">
-
-<h5>Sorry, the phrase "<%= @input %>" wasn't found.</h5>
-<br>
-<h5>Please try again.</h5>
+    <h5 class="issue_text">Sorry, the phrase</h5>
+    <h5 class="issue_text">‘<%= @input %>’</h5>
+    <h5 class="issue_text">wasn't found.</h5>
+    <h5 class="issue_text">Please try again.</h5>
+  </div>
 
 </div>
 <% end %>
