@@ -176,7 +176,6 @@ html {
 @media (max-width: 550px) {
   html {
     font-size: 90%;
-
   }
 }
 
@@ -208,8 +207,6 @@ h1 {
   margin-top: 0.5em;
   text-decoration: none;
 }
-
-
 
 h2 {
   font-size: 3.6rem;
@@ -582,9 +579,7 @@ crossed {
   text-decoration: line-through;
 }
 
-#tagline {
-
-}
+#tagline {}
 
 #tagline_sub {
   text-transform: uppercase;
@@ -593,20 +588,26 @@ crossed {
   letter-spacing: 0.2em;
 }
 
-
-
 emphases {
   text-decoration: underline;
 }
 
-@media (min-width: 800px) {
+
+
+
+@media only screen and (min-device-width: 760px) and (max-device-width: 1200px) {
   .issue_field, .input_field, .output_field {
     width: 70%;
-    /*border-radius: 0.3em;*/
+
   }
 }
 
+@media (min-width: 1000px) {
+  .issue_field, .input_field, .output_field {
+    width: 70%;
 
+  }
+}
 
 select, textarea {
   margin: 0 auto;
@@ -806,10 +807,8 @@ header {
   display: flex;
 }
 
-.logo_box  {
-
+.logo_box {
   text-align: left;
-
   min-height: 5em;
 }
 
@@ -820,8 +819,6 @@ header {
   font-size: 0.5em;
   min-height: 5em;
 }
-
-
 
 select {
   display: block;
