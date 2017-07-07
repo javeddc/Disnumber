@@ -526,7 +526,7 @@ body {
   text-align: center;
   width: 100%;
   margin: auto;
-  background-color: hsla(116, 100%, 50%, 0.5);
+  background-color: hsla(116, 65%, 60%, 1);
   padding: 1em;
 }
 
@@ -552,6 +552,7 @@ body {
 #phrase_text {
   font-size: 2.4em;
   font-weight: 700;
+  display: inline-block;
 }
 
 .error_img {
@@ -566,6 +567,19 @@ body {
   font-size: 2.4em;
   font-weight: 700;
   text-decoration: none;
+  color: #0B2BCD;
+}
+
+.result_field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.highlight {
+
+  margin: 0 auto 3em auto;
 }
 
 quotes {
@@ -573,19 +587,25 @@ quotes {
   font-size: 2.4em;
   font-weight: 700;
   text-decoration: none;
+
+
 }
 
 crossed {
   text-decoration: line-through;
 }
 
-#tagline {}
+#tagline {
+  font-size: 1.2em;
+  font-family: sans-serif;
+}
 
 #tagline_sub {
   text-transform: uppercase;
   font-weight: 100;
-  font-size: 0.75em;
+  font-size: 0.65em;
   letter-spacing: 0.2em;
+  font-family: sans-serif;
 }
 
 emphases {
@@ -595,18 +615,30 @@ emphases {
 
 
 
-@media only screen and (min-device-width: 760px) and (max-device-width: 1200px) {
+@media only screen and (min-device-width: 300px) and (max-device-width: 1000px) {
   .issue_field, .input_field, .output_field {
-    width: 70%;
 
   }
+  html {
+    font-size: 52%;
+  }
 }
+
+@media only screen and (min-device-width: 1000px){
+  .input_field {
+
+  }
+  html {
+    font-size: 80%;
+  }
+}
+
 
 @media (min-width: 1000px) {
   .issue_field, .input_field, .output_field {
     width: 70%;
-
   }
+
 }
 
 select, textarea {
@@ -831,8 +863,10 @@ select {
 
 button {
   display: inline-block;
-  margin: 0;
-  border: 1px solid hsla(116, 100%, 100%, 0.4);
+  margin: 0.5em;
+  border: 1px solid hsla(116, 100%, 0%, 0.2);
+  border-radius: 2em;
+  color: hsla(116, 100%, 0%, 0.3);
   padding: 0.3em;
   background-color: transparent;
   text-transform: uppercase;
@@ -843,6 +877,8 @@ button {
 
 button:hover {
   background-color: hsla(116, 100%, 100%, 0.5);
+  color: hsla(116, 100%, 0%, 0.6);
+  border: 1px solid hsla(116, 100%, 0%, 0.4);
 }
 
 button:focus, input:focus {
@@ -852,13 +888,13 @@ button:focus, input:focus {
 html, body {
   margin: 0;
   width: 100%;
+  height: 100%;
+  min-height: 100%;
   background: transparent;
 }
 
 html {
-  height: 102%;
-  max-width: 80em;
-  margin: auto;
+
   background: #a7cfdf;
   /* Old browsers */
   background: -moz-linear-gradient(-45deg, lightgrey, grey);
