@@ -1,4 +1,6 @@
-<a href="/dashboard"><h3>dashboard</h3></a>
+<a href="/dashboard">
+  <h3>dashboard</h3>
+</a>
 <h4>Request details:</h4>
 <p>Request ID:
   <%= @req.id %></p>
@@ -11,20 +13,22 @@
 
 <% if @req.status == 'open' %>
 <div class="issue_field">
-<% elsif @req.status == 'closed' %>
-<div class="output_field">
-<% end %>
+  <% elsif @req.status == 'closed' %>
+  <div class="output_field">
+    <% end %>
 
-  <p>Current pairing:</p>
-  <p>ID:
-    <%= @req.pair_id %></p>
-  <p>Current phrase for <%= @req.digits %>:
-    <%= Pair.where(digits: @req.digits).order('time_stamp ASC').last.phrase %></p>
+    <p>Current pairing:</p>
+    <p>ID:
+      <%= @req.pair_id %></p>
+    <p>Current phrase for
+      <%= @req.digits %>:
+      <%= Pair.where(digits: @req.digits).order('time_stamp ASC').last.phrase %></p>
 
-<% if @req.status == 'open' %>
+    <% if @req.status == 'open' %>
     <form action="/record" method="post">
 
-      <p>Suggested replacement: </p>
+      <p>Suggested replacement:
+      </p>
       <input type="hidden" name="rand_adj_1" value="<%= @rand_adj_1 %>">
       <input type="hidden" name="rand_adj_2" value="<%= @rand_adj_2 %>">
       <input type="hidden" name="rand_noun_1" value="<%= @rand_noun_1 %>">
@@ -33,12 +37,12 @@
       <input type="hidden" name="pair_size" value="<%= Pair.find(@req.pair_id).size %>">
       <input type="hidden" name="req_id" value="<%= @req.id %>">
       <p class="highlighted">
-      <% case Pair.find(@req.pair_id).size
+        <% case Pair.find(@req.pair_id).size
       when 2 %>
-      <%= "#{Adjective.find(@rand_adj_1).word} #{Noun.find(@rand_noun_1).word}" %>
-      <% when 3 %>
-      <%= "#{Adjective.find(@rand_adj_1).word} #{Adjective.find(@rand_adj_2).word} #{Noun.find(@rand_noun_1).word}" %>
-      <% end %>
+        <%= "#{Adjective.find(@rand_adj_1).word} #{Noun.find(@rand_noun_1).word}" %>
+        <% when 3 %>
+        <%= "#{Adjective.find(@rand_adj_1).word} #{Adjective.find(@rand_adj_2).word} #{Noun.find(@rand_noun_1).word}" %>
+        <% end %>
       </p>
 
       <button>Accept Replacement</button>
@@ -46,14 +50,13 @@
     <form action="/detail/<%= @req.id %>" method="get">
       <button>Generate New Phrase</button>
     </form>
-<% end %>
+    <% end %>
 
+  </div>
 
-</div>
+  <br>
 
-<br>
-
-<p>Email:
-  <%= @req.email %></p>
-<p>Message:
-  <%= @req.message %></p>
+  <p>Email:
+    <%= @req.email %></p>
+  <p>Message:
+    <%= @req.message %></p>

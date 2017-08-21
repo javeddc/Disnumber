@@ -19,16 +19,16 @@
 
     <% Request.all.order(:status).limit(10).offset(10 * @page).each do |request| %>
 
+    <tr>
 
-      <tr>
+      <td>
+        <a href="/detail/<%= request.id %>"><%= request.id %></a>
+      </td>
+      <td><%= request.status %></td>
+      <td><%= request.request_type %></td>
+      <td><%= Pair.find(request.pair_id).phrase %></td>
 
-        <td><a href="/detail/<%= request.id %>"><%= request.id %></a></td>
-        <td><%= request.status %></td>
-        <td><%= request.request_type %></td>
-        <td><%= Pair.find(request.pair_id).phrase %></td>
-
-      </tr>
-
+    </tr>
 
     <% end %>
 
