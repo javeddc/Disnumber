@@ -13,6 +13,7 @@ require_relative 'models/user'
 enable :sessions
 
 helpers do
+
   def logged_in?
     if current_user
       true
@@ -24,6 +25,7 @@ helpers do
   def current_user
     User.find_by(id: session[:user_id])
   end
+
 end
 
 get '/' do
@@ -51,9 +53,8 @@ get '/result' do
     redirect '/error'
   end
 
-
-
   if /\d/.match? input
+
     @found = true
     @search_type = 'digits'
     @digits = input.gsub(' ','')
@@ -99,7 +100,6 @@ get '/result' do
           access_count: 0
           )
 
-
       end
 
     end
@@ -120,6 +120,7 @@ get '/result' do
         found_pair = nil
       end
     end
+
     if words.length == 3
       if Adjective.exists?(word: words[0]) && Adjective.exists?(word: words[1]) && Noun.exists?(word: words[2])
         a1 = Adjective.find_by(word: words[0]).id
@@ -130,6 +131,7 @@ get '/result' do
         found_pair = nil
       end
     end
+
     if found_pair != nil
       @digits = found_pair.digits
       @phrase = found_pair.phrase
@@ -171,6 +173,7 @@ post '/session' do
     @logfail = true
     erb :login
   end
+
 end
 
 get '/dashboard' do

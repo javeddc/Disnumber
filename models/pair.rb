@@ -14,12 +14,17 @@ class Pair < ActiveRecord::Base
   end
 
   def size
+
     if adjective_2_id.nil? && noun_2_id.nil?
       2
+
     elsif !adjective_2_id.nil? && noun_2_id.nil?
       3
+
     else
       4
     end
+
   end
+
 end
