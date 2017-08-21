@@ -1,19 +1,14 @@
 require 'sinatra'
-# require 'sinatra/reloader'
-# require 'pry'
 require 'active_record'
 require_relative 'db_config'
-
 require_relative 'models/adjective'
 require_relative 'models/noun'
 require_relative 'models/pair'
 require_relative 'models/request'
 require_relative 'models/user'
-
 enable :sessions
 
 helpers do
-
   def logged_in?
     if current_user
       true
@@ -25,7 +20,6 @@ helpers do
   def current_user
     User.find_by(id: session[:user_id])
   end
-
 end
 
 get '/' do
@@ -42,26 +36,21 @@ end
 
 get '/result' do
   input = params[:user_input].downcase
-
   if input.match?(/[^A-Za-z\d +#*-]/)
     @error_input = input
     redirect '/error'
   end
-
   if input.match?(/\d/) && input.match?(/[A-Za-z]/)
     @error_input = input
     redirect '/error'
   end
-
   if /\d/.match? input
-
     @found = true
     @search_type = 'digits'
     @digits = input.gsub(' ','')
     if !Pair.exists?(digits: @digits)
       adj_id_arr = Adjective.where.not(id: nil).pluck(:id)
       noun_id_arr = Noun.where.not(id: nil).pluck(:id)
-
       if Pair.count < 450000
         new_pair_found = false
         while new_pair_found == false do
@@ -78,9 +67,7 @@ get '/result' do
           noun_1_id: n1,
           access_count: 0
           )
-
       else
-
         new_pair_found = false
         while new_pair_found == false do
           a1 = adj_id_arr.sample
@@ -90,7 +77,6 @@ get '/result' do
             new_pair_found = true
           end
         end
-
         Pair.create(
           digits: @digits,
           time_stamp: Time.now,
@@ -99,15 +85,12 @@ get '/result' do
           noun_1_id: n1,
           access_count: 0
           )
-
       end
-
     end
     found_pair = Pair.where(digits: @digits).order('time_stamp ASC').last
     found_pair.access_count += 1
     found_pair.save
     @phrase = found_pair.phrase
-
   else
     @search_type = 'phrase'
     words = input.split(/ |\.|,|-/)
@@ -120,7 +103,6 @@ get '/result' do
         found_pair = nil
       end
     end
-
     if words.length == 3
       if Adjective.exists?(word: words[0]) && Adjective.exists?(word: words[1]) && Noun.exists?(word: words[2])
         a1 = Adjective.find_by(word: words[0]).id
@@ -131,7 +113,6 @@ get '/result' do
         found_pair = nil
       end
     end
-
     if found_pair != nil
       @digits = found_pair.digits
       @phrase = found_pair.phrase
@@ -140,7 +121,6 @@ get '/result' do
       @input = input
       @found = false
     end
-
   end
   erb :result
 end
@@ -164,16 +144,13 @@ end
 
 post '/session' do
   user = User.find_by(email: params[:email])
-
   if user && user.authenticate(params[:pword])
     session[:user_id] = user.id
-
     redirect '/dashboard'
   else
     @logfail = true
     erb :login
   end
-
 end
 
 get '/dashboard' do
