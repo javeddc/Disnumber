@@ -1,0 +1,46 @@
+Table "public.adjectives"
+Column |         Type          |                        Modifiers                        | Storage  | Stats target | Description
+--------+-----------------------+---------------------------------------------------------+----------+--------------+-------------
+id     | integer               | not null default nextval('adjectives_id_seq'::regclass) | plain    |              |
+word   | character varying(16) | not null                                                | extended |              |
+
+
+Table "public.nouns"
+Column |         Type          |                     Modifiers                      | Storage  | Stats target | Description
+--------+-----------------------+----------------------------------------------------+----------+--------------+-------------
+id     | integer               | not null default nextval('nouns_id_seq'::regclass) | plain    |              |
+word   | character varying(16) | not null                                           | extended |              |
+
+
+Table "public.pairs"
+Column     |            Type             |                     Modifiers                      | Storage  | Stats target | Description
+----------------+-----------------------------+----------------------------------------------------+----------+--------------+-------------
+id             | integer                     | not null default nextval('pairs_id_seq'::regclass) | plain    |              |
+digits         | character varying(30)       | not null                                           | extended |              |
+time_stamp     | timestamp without time zone | not null                                           | plain    |              |
+adjective_1_id | integer                     | not null                                           | plain    |              |
+noun_1_id      | integer                     | not null                                           | plain    |              |
+adjective_2_id | integer                     |                                                    | plain    |              |
+noun_2_id      | integer                     |                                                    | plain    |              |
+access_count   | integer                     |                                                    | plain    |              |
+
+
+Table "public.requests"
+Column    |            Type             |                       Modifiers                       | Storage  | Stats target | Description
+--------------+-----------------------------+-------------------------------------------------------+----------+--------------+-------------
+id           | integer                     | not null default nextval('requests_id_seq'::regclass) | plain    |              |
+request_type | character varying(6)        |                                                       | extended |              |
+status       | character varying(6)        | not null                                              | extended |              |
+pair_id      | integer                     |                                                       | plain    |              |
+digits       | character varying(30)       | not null                                              | extended |              |
+email        | character varying(300)      |                                                       | extended |              |
+message      | character varying(5000)     |                                                       | extended |              |
+time_stamp   | timestamp without time zone | not null                                              | plain    |              |
+
+
+Table "public.users"
+Column      |          Type          |                     Modifiers                      | Storage  | Stats target | Description
+-----------------+------------------------+----------------------------------------------------+----------+--------------+-------------
+id              | integer                | not null default nextval('users_id_seq'::regclass) | plain    |              |
+email           | character varying(300) |                                                    | extended |              |
+password_digest | text                   |                                                    | extended |              |
