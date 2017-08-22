@@ -1,22 +1,22 @@
 ## Access
 
-Access the project via [disnumber.com](http://www.disnumber.com)!
+Access the project via [Disnumber.com](http://www.disnumber.com)!
 
-## Description
+## Project Description
 
-Disnumber is a free service that provides a persistent, memorable english phrase for any number you don't want to have to remember. Use it for phone numbers, IDs, serial numbers, or any other number you need to remember or exchange.
+Disnumber is a free service that provides a persistent, memorable english language phrase for any number you don't want to have to remember. Use it for phone numbers, IDs, serial numbers, or any other number you need to remember or exchange.
 
 First look up the number, and then you can use the unique phrase whenever you want to let someone else use the number or check it yourself.
 
 Disnumber doesn't keep your personal information other than any numbers you provide, and won't ever contact you or share any number you enter.
 
-Because Disnumber can include dialing characters (like +, #, and \*) it's particularly useful for international phone numbers. When searching by phrase, the corresponding number can be called by tapping the number if you're using disnumber on a smartphone.
+Because Disnumber can include dialing characters (like +, #, and \*) it's particularly useful for international phone numbers. When searching by phrase, the corresponding number can be called by tapping the number if you're using Disnumber on a smartphone.
 
-Disnumber is a project by Javed de Costa. If you have any issues or feedback, get in touch at github.com/javeddc
+Disnumber is a project by Javed de Costa. If you have any issues or feedback, get in touch [through my github](github.com/javeddc).
 
-## Implementation
+## Implementation Notes
 
-Disnumber is a Sinatra app, backed by a PostgreSQL database. It was written for Ruby version 2.4.1, and deployed on Heroku. As well as Sinatra and Disnumber uses PG and ActiveRecord for the database and Bcrypt for password handling. 
+Disnumber is a Sinatra app, backed by a PostgreSQL database. It was written for Ruby version 2.4.1, and deployed on Heroku. Disnumber uses PG and ActiveRecord for the database and Bcrypt for password handling.
 
 The app depends on having access to a PostgreSQL database named 'disnumber' and having a table structure that follows that outlined in `/schema.txt`.
 
