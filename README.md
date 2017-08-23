@@ -25,3 +25,5 @@ Once you have set up the database, you should be able to run the `main.rb` in Ru
 There is Javascript input validation in the front end, and also further server side validation.
 
 Users can flag phrases they think are inappropriate, or just want to change. An admin-accessible control panel was also implemented, allowing admin accounts to view these flags and change requests, and resolve them within the browser.
+
+Copyright 2017
