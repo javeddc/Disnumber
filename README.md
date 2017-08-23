@@ -14,6 +14,23 @@ Because Disnumber can include dialing characters (like +, #, and \*) it's partic
 
 Disnumber is a project by Javed de Costa. If you have any issues or feedback, get in touch [through my github](github.com/javeddc).
 
+## API Documentation
+
+Disnumber has a free API – it's easy to use. 
+
+It's accessible at [http://www.disnumber.com/api_request](http://www.disnumber.com/api_request). It takes one parameter, "search", which you can give a search string. This can be a number or a phrase – the API will detect what type and return the appropriate response. Numbers can include +, * and # characters. Phrases must have no special characters, and must be separated by a space. 
+
+The result format is a JSON string. 
+
+Sucessful number lookup result: 
+`{"result":"honeycomb waterfall","error_message":"","result_type":"phrase"}`
+
+Sucessful phrase lookup result: 
+`{"result":"+61417418089","error_message":"","result_type":"number"}`
+
+Error example: 
+`{"result":"","error_message":"No number was found for this phrase. Please check your phrase and try again!","result_type":"error"}`
+
 ## Implementation Notes
 
 Disnumber is a Sinatra app, backed by a PostgreSQL database. It was written for Ruby version 2.4.1, and deployed on Heroku. Disnumber uses PG and ActiveRecord for the database and Bcrypt for password handling.
@@ -26,4 +43,4 @@ There is Javascript input validation in the front end, and also further server s
 
 Users can flag phrases they think are inappropriate, or just want to change. An admin-accessible control panel was also implemented, allowing admin accounts to view these flags and change requests, and resolve them within the browser.
 
-Copyright 2017
+Copyright 2017. Feel free to incorporate Disnumber and the Disnumber API into your projects – but please always have a link visible to www.disnumber.com. 
